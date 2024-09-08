@@ -1,5 +1,5 @@
 # imports
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QGridLayout, QHBoxLayout, QVBoxLayout, QLineEdit
+from PySide6.QtWidgets import QApplication, QWidget, QLineEdit, QPushButton, QHBoxLayout, QVBoxLayout, QGridLayout 
 
 class CalcApp(QWidget):
     def __init__(self):
@@ -34,7 +34,6 @@ class CalcApp(QWidget):
         self.clear = QPushButton("Clear")
         self.delete = QPushButton("<--")
         
-        # Design
         master_layout = QVBoxLayout()
         master_layout.addWidget(self.text_box) # text field addition
         master_layout.addLayout(self.grid)  # number grid addition
@@ -44,11 +43,11 @@ class CalcApp(QWidget):
         button_row.addWidget(self.delete)
 
         master_layout.addLayout(button_row)  # adds the bottom row to the layout
-        main_window.setLayout(master_layout)
+        self.setLayout(master_layout)
 
         self.clear.clicked.connect(self.button_click)
         self.delete.clicked.connect(self.button_click)
-
+        
     def button_click(self):
         button = app.sender()
         text = button.text()
@@ -71,11 +70,12 @@ class CalcApp(QWidget):
         else: 
             current_value = self.text_box.text()
             self.text_box.setText(current_value + text)
+        
 
 
 #Show/Run
-if __name__ == "__main__":
+if __name__ in "__main__":
     app = QApplication([])
-    main_window = CalcApp
-    CalcApp.show()
+    main_window = CalcApp()
+    main_window.show()
     app.exec()
