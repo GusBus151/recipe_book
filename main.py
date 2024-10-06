@@ -1,5 +1,6 @@
 # imports
 from PyQt6.QtWidgets import QApplication, QWidget, QLineEdit, QPushButton, QHBoxLayout, QVBoxLayout, QGridLayout 
+from PyQt6.QtGui import QFont
 
 class CalcApp(QWidget):
     def __init__(self):
@@ -10,6 +11,9 @@ class CalcApp(QWidget):
         # All Objects
 
         self.text_box = QLineEdit()
+        self.text_box.setFont(QFont("Helvetica", 32))
+        
+        
         self.grid = QGridLayout()
 
         self.buttons = [
@@ -24,6 +28,7 @@ class CalcApp(QWidget):
         for text in self.buttons:
             button = QPushButton(text)
             button.clicked.connect(self.button_click)
+            button.setStyleSheet("QPushButton { font: 25pt Comic Sans MS; padding: 10px; }")
             self.grid.addWidget(button, row, col)
         
             col +=1 
@@ -34,9 +39,13 @@ class CalcApp(QWidget):
         self.clear = QPushButton("Clear")
         self.delete = QPushButton("<--")
         
+        self.clear.setStyleSheet("QPushButton { font: 25pt Comic Sans MS; padding: 10px; }")
+        self.delete.setStyleSheet("QPushButton { font: 25pt Comic Sans MS; padding: 10px; }")
+        
         master_layout = QVBoxLayout()
         master_layout.addWidget(self.text_box) # text field addition
         master_layout.addLayout(self.grid)  # number grid addition
+        master_layout.setContentsMargins(25,25,25,25)
 
         button_row = QHBoxLayout() # clear and delete row declaration
         button_row.addWidget(self.clear)
@@ -77,5 +86,6 @@ class CalcApp(QWidget):
 if __name__ in "__main__":
     app = QApplication([])
     main_window = CalcApp()
+    main_window.setStyleSheet("QWidget { background-color: #f0f0f8 }")
     main_window.show()
     app.exec()
